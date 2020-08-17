@@ -1,0 +1,47 @@
+@import 'vars';
+
+.form-item {
+    margin-bottom: 20px;
+
+    .el-date-editor {
+        width: 100%;
+    }
+    
+    label {
+        display: block;
+        margin-bottom: 3px;
+        width: 100%;
+        text-align: left;
+        font-size: 12px;
+        opacity: 1;
+        
+
+        .label-optional {
+            font-size: 12px;
+            opacity: 0.5;
+        }
+    }
+
+    &.error {
+        label {
+            color: $color-validate-error;
+        }
+
+        input {
+            border-color: $color-validate-error;
+        }
+
+        textarea {
+            border-color: $color-validate-error;
+        }
+    }
+
+    .error-message {
+        display: block;
+        font-size: 12px;
+        padding-top: 5px;
+        color: $color-validate-error;
+    }
+
+    
+}

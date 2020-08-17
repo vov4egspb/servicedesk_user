@@ -8,8 +8,9 @@ import PublicLayout from '@/layouts/public.vue'
 
 import Dashboard from '@/views/dashboard'
 import LoginPage from '@/views/login'
-// import TicketsListView from '@/views/tickets/ticketsList.vue'
-// import TicketDetail from '@/views/tickets/ticketDetail.vue'
+import TicketsList from '@/views/tickets/list.vue'
+import TicketDetail from '@/views/tickets/detail.vue'
+import TicketCreate from '@/views/tickets/new.vue'
 // import ListSettings from '@/views/settings/listSettings.vue'
 
 // import ListAdminSettings from '@/views/settings/admin/listAdminSettings.vue'
@@ -36,27 +37,35 @@ let publicPages = {
     ]
 }
 
-// let ticketPages = {
-//     path: '/tickets',
-//     component: DefaultLayout,
-//     redirect: '/tickets/list',
-//     children: [
-//         {
-//             path: 'list/:queueId',
-//             component: TicketsListView,
-//             meta: {
-//                 requiresAuth: true
-//             }
-//         },
-//         {
-//             path: 'detail/:ticketId',
-//             component: TicketDetail,
-//             meta: {
-//                 requiresAuth: true
-//             }
-//         }
-//     ]
-// }
+let ticketPages = {
+    path: '/tickets',
+    component: DefaultLayout,
+    redirect: '/tickets/list',
+    children: [
+        {
+            path: 'list',
+            component: TicketsList,
+            meta: {
+                requiresAuth: true
+            }
+        },
+        {
+            path: 'detail/:ticketId',
+            component: TicketDetail,
+            meta: {
+                requiresAuth: true
+            }
+        },
+        {
+            path: 'new',
+            component: TicketCreate,
+            meta: {
+                requiresAuth: true
+            }
+        }
+        
+    ]
+}
 
 // let settingsPages = {
 //     path: '/settings',
@@ -124,26 +133,26 @@ let publicPages = {
 const routes = [
     {
         path: '*',
-        redirect: '/dashboard',
+        redirect: '/tickets/list',
     },
-    {
-        path: '/',
-        component: DefaultLayout,
-        redirect: '/dashboard',
-        name: 'Dashboard layout',
-        children: [
-            {
-                path: 'dashboard',
-                name: 'Dashboard',
-                component: Dashboard,
-                meta: {
-                    requiresAuth: true
-                }
-            }
-        ]
-    },
+    // {
+    //     path: '/',
+    //     component: DefaultLayout,
+    //     redirect: '/dashboard',
+    //     name: 'Dashboard layout',
+    //     children: [
+    //         {
+    //             path: 'dashboard',
+    //             name: 'Dashboard',
+    //             component: Dashboard,
+    //             meta: {
+    //                 requiresAuth: true
+    //             }
+    //         }
+    //     ]
+    // },
     publicPages,
-    // ticketPages,
+    ticketPages,
     // settingsPages,
     // adminSettingsPages
 ]

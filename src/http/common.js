@@ -14,7 +14,7 @@ function addSubscriber(callback) {
 }
 
 const HTTP = axios.create({
-    baseURL: process.env.NODE_ENV === 'development' ? 'http://api01.start.local/users/v1/' : '',
+    baseURL: process.env.NODE_ENV === 'development' ? 'http://api01.start.local/users/v1/' : 'http://api01.start.local/users/v1/',
 })
 
 
@@ -57,6 +57,13 @@ HTTP.interceptors.response.use(function (response) {
         })
         return retryOriginalRequest
     }
+        
+    if (status === 403) {
+        store.dispatch('logout')
+    }
+        
+
+
     return Promise.reject(error)
 })
 

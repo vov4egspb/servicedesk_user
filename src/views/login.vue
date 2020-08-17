@@ -1,5 +1,5 @@
 <template>
-    <div class="login-wrapper">
+    <div class="login-wrapper" v-loading="loading">
         <el-card class="box-card">
             <div slot="header" class="clearfix">
                 <span>Вход в систему</span>
@@ -65,9 +65,8 @@ export default {
                 this.loading = true
                 this.$store.dispatch('login', this.form)
                     .then(res => {
-                        console.log(res);
                         if (res.success) {
-                            //this.$router.push("/tickets/list")
+                            this.$router.push("/tickets/list")
                         } else {
                             this.$notify({
                                 title: 'Ошибка авторизации',

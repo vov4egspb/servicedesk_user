@@ -6,8 +6,8 @@ export default {
     state: {
         user: {
             name: '',
-            mail: '',
-            superuser: null
+            email: '',
+            allow_dev_ticket: false
         },
         token: cookie.get('token') || null
     },
@@ -69,7 +69,7 @@ export default {
                 return new Promise((resolve, reject) => {
                     HTTP.get('common/init')
                         .then((response) => {
-                            commit('updateUser', response.data.agent)
+                            commit('updateUser', response.data.user)
                             resolve()
                         })
                         .catch((error) => {
@@ -89,7 +89,8 @@ export default {
 
     getters: {
         user: state => state.user,
-        isLogged: state => state.token ? true : false
+        isLogged: state => state.token ? true : false,
+        isAllowDevTicket: state => state.user.allow_dev_ticket == 1 ? true : false
     }
 
 }

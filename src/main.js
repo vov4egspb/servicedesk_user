@@ -4,10 +4,23 @@ import VueRouter from 'vue-router'
 import routes from './routes'
 import store from './store'
 import ElementUI from 'element-ui'
+import VeeValidate, { Validator } from 'vee-validate'
+import lang from 'element-ui/lib/locale/lang/ru-RU'
+import locale from 'element-ui/lib/locale'
 import 'element-ui/lib/theme-chalk/index.css'
+import fontAwesome from './fontAwesome'
+import VueImg from 'v-img'
+import ru from 'vee-validate/dist/locale/ru'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import './assets/scss/main.scss'
 
 Vue.use(ElementUI)
 Vue.use(VueRouter)
+Vue.use(VeeValidate)
+Vue.use(fontAwesome)
+locale.use(lang)
+Vue.use(VueImg)
+Validator.localize('ru', ru)
 
 
 const router = new VueRouter({
