@@ -7,7 +7,6 @@
                     <font-awesome-icon icon="filter"/>
                     {{show.filter ? 'скрыть' : 'показать'}} фильтр
                 </span>
-                <el-button type="success" @click="$router.push('/tickets/new')">Создать заявку</el-button>
             </div>
         </div>
         <div class="filter-wrapper" v-if="show.filter">
@@ -44,6 +43,7 @@
                         <el-date-picker
                             v-model="filter.date"
                             type="daterange"
+                            value-format="yyyy-MM-dd"
                             range-separator="-"
                             start-placeholder="от"
                             end-placeholder="до">
@@ -99,7 +99,7 @@
                         </span>
                     </template>
                 </el-table-column>
-                <el-table-column prop="status" label="Статус" width="100" sortable>
+                <el-table-column prop="status" label="Статус" width="130" sortable>
                     <template slot-scope="scope">
                         <span class="cell__center"><ticket-status type="bage" :id="scope.row.status"/></span>
                     </template>
@@ -130,7 +130,6 @@ import EventsList from '@/components/tickets/EventsList.vue'
 export default {
     components: {
         ticketStatus,
-        
     },
 
     filters: {

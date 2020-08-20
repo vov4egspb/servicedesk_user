@@ -66,7 +66,11 @@ export default {
                 this.$store.dispatch('login', this.form)
                     .then(res => {
                         if (res.success) {
-                            this.$router.push("/tickets/list")
+                            if (this.$route.query) {
+                               this.$router.replace(this.$route.query.from)
+                            } else {
+                               this.$router.push("/tickets/list")
+                            }
                         } else {
                             this.$notify({
                                 title: 'Ошибка авторизации',

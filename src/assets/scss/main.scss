@@ -76,6 +76,10 @@ input::-webkit-inner-spin-button {
     outline: 0;
 }
 
+.el-notification__content {
+    text-align: left;
+}
+
 
 @import 'vars';
 @import 'forms';

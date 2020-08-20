@@ -6,14 +6,20 @@
     .el-date-editor {
         width: 100%;
     }
+
+    .el-textarea__inner:focus {
+        outline: 0;
+        border-color: #1a1a46;
+    }
     
     label {
         display: block;
         margin-bottom: 3px;
         width: 100%;
         text-align: left;
-        font-size: 12px;
+        font-size: 14px;
         opacity: 1;
+        font-weight: bold;
         
 
         .label-optional {

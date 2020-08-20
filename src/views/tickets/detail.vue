@@ -16,6 +16,9 @@
             </div>
             <div class="info-wrapper">
                 <div class="agent">
+                    Очередь: <span v-if="detail.queue_name">{{detail.queue_name}}</span><template v-else>нет</template>
+                </div>
+                <div class="agent ml-3">
                     Исполнитель: <span v-if="detail.agent_name">{{detail.agent_name}}</span><template v-else>нет</template>
                 </div>
             </div>
@@ -24,7 +27,21 @@
             <el-tabs type="border-card">
                 <el-tab-pane label="Текст обращения">
                     <attachments-list :data="attachments" />
-                    <div class="ticket-text" v-html="detail.text"></div>
+                    <div v-if="detail.type == 1" class="text" v-html="detail.text"></div>
+                    <div v-else class="text">
+                        <div>
+                            <div><b>Обоснование необходимости доработки:</b></div>
+                            <div class="mt-1"><p>{{detail.reason}}</p></div>
+                        </div>
+                        <div>
+                            <div><b>Описание задачи:</b></div>
+                            <div class="mt-1"><p>{{detail.text}}</p></div>
+                        </div>
+                        <div>
+                            <div><b>Результат доработки:</b></div>
+                            <div class="mt-1"><p>{{detail.result_dev}}</p></div>
+                        </div>
+                    </div>
                 </el-tab-pane>
                 <el-tab-pane>
                     <span slot="label">
@@ -155,6 +172,11 @@ export default {
         .body {
             margin-top: 10px;
 
+            .text {
+                margin-top: 10px;
+                font-size: 14px;
+            }
+
         }
 
         .el-breadcrumb__separator {
@@ -163,11 +185,13 @@ export default {
 
         .info-wrapper {
             padding: 10px 0;
+            display: flex;
+
             .agent {
                 font-size: 14px;
                 span {
                     margin-left: 5px;
-                    padding: 5px 10px;
+                    padding: 3px 11px 4px 11px;
                     background: #4c4c4c;
                     color: #fff;
                     font-size: 12px;

@@ -90,7 +90,7 @@
                 <div class="row">
                     <div class="col-12">
                         <div :class="['form-item', {error: getError('text')}]">
-                            <label>Текст</label>
+                            <label>Описание</label>
                             <el-input
                                 type="textarea"
                                 :rows="10"
@@ -198,7 +198,7 @@ export default {
             selects: {
                 types: [
                     {id: 1, label: 'Стандартная'},
-                    {id: 2, label: 'На разработку'},
+                    {id: 2, label: 'На доработку'},
                 ],
                 users: [],
                 agents: [],
@@ -224,25 +224,7 @@ export default {
         
     },
 
-    created() {
-        this.init()
-    },
-
     methods: {
-       
-       init() {
-            this.loading.init = true
-            HTTP.get('tickets/create_init')
-                .then(res => {
-                    if (res.data.success) {
-                        this.selects.queues = res.data.queues
-                    }
-                })
-                .catch(err => {
-                    throw new Error(err)
-                })
-                .finally(() => this.loading.init = false)
-        },
 
         submit() {
             this.$validator.validateAll().then(async isValid => {
@@ -368,6 +350,11 @@ export default {
 
 <style lang="scss">
     .create-ticket {
+
+        h1 {
+            font-size: 32px;
+            margin-top: 20px;
+        }
         
 
         .image-attach-list {

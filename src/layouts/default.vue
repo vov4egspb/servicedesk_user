@@ -15,6 +15,16 @@
                                         </div>    
                                     </span>
                                 </div>
+                                <div class="flex-grow-1">
+                                    <el-button 
+                                        class="ml-4"
+                                        type="success" 
+                                        size="small" 
+                                        @click="$router.push('/tickets/new')"
+                                    >
+                                        Создать заявку
+                                    </el-button>
+                                </div>
                                 <div class="d-flex">
                                     <div class="agent-name">
                                         {{user.name}}<br>
@@ -95,6 +105,10 @@ export default {
         max-width: 100%;
         min-height: 100vh;
         padding-top: 80px;
+
+        .content {
+            padding-bottom: 50px;
+        }
         
 
         .menu-icon {
@@ -122,6 +136,7 @@ export default {
             padding: 0 20px;
             padding-right: 20px;
             color: #fff;
+            z-index: 100;
 
             .logo-wrapper {
                 display: flex;

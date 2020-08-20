@@ -31,7 +31,7 @@ export default {
 
     methods: {
         getExtIcon(ext) {
-            return ext.match(/(pdf|xls|xlsx|txt|rdp|zip|7z)/) ? ext : 'txt'
+            return ext.match(/(pdf|xls|xlsx|txt|rdp|zip|7z|docx|doc)/) ? ext : 'txt'
         }
     }
 }

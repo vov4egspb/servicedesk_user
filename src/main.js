@@ -33,7 +33,8 @@ router.beforeEach(async (to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
 
     if (!store.getters.isLogged) {
-      next('/login')
+        const loginpath = window.location.pathname
+        next({ path: '/login', query: { from: loginpath } })
     } else {
       await store.dispatch('initUser')
 

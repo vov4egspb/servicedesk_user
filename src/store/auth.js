@@ -64,13 +64,17 @@ export default {
             })
         },
 
-        initUser: ({ commit, state }) => {
+        initUser: ({ commit, dispatch, state }) => {
             //if (state.token) {
                 return new Promise((resolve, reject) => {
                     HTTP.get('common/init')
                         .then((response) => {
-                            commit('updateUser', response.data.user)
-                            resolve()
+                            if (response.data.success) {
+                                commit('updateUser', response.data.user)
+                                resolve()
+                            } else {
+                                dispatch('logout')
+                            }
                         })
                         .catch((error) => {
                             console.log(error)
