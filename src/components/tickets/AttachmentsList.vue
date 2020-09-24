@@ -4,15 +4,15 @@
         <ul>
             <li v-for="item in data" :key="item.id">
                 <div v-if="item.type == 1">
-                    <img :src="`http://api01.start.local/uploads/attachments/${item.filename}`" v-img>
+                    <img :src="`${path}/${item.filename}`" v-img>
                 </div>
                 <div v-else>
-                    <a :href="`http://api01.start.local/uploads/attachments/${item.filename}`" target="_blank">
+                    <a :href="`${path}/${item.filename}`" target="_blank">
                         <img class="ext-icons" :src="`/images/icons/${getExtIcon(item.ext)}.png`">
                     </a>
                 </div>
                 <div class="filename">
-                    <a :href="`http://api01.start.local/uploads/attachments/${item.filename}`" target="_blank">{{item.filename}}</a>
+                    <a :href="`${path}/${item.filename}`" target="_blank">{{item.filename}}</a>
                 </div>
             </li>
         </ul>
@@ -27,6 +27,12 @@ export default {
     name: 'AttachmentsList',
     props: {
         data: Array,
+    },
+
+    data() {
+      return {
+        path: process.env.NODE_ENV === 'development' ? 'http://api01.start.local/uploads/attachments' : 'http://api.spb-buh-desc-1.start.local/uploads/attachments'
+      }
     },
 
     methods: {
@@ -87,6 +93,7 @@ export default {
                 
                 img {
                     max-height: 50px;
+                    max-width: 100px;
                     margin-bottom: 5px;
                 }
             }

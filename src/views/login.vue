@@ -10,6 +10,7 @@
                         <label>Логин</label>
                         <el-input 
                             name="login"
+                            data-vv-name="логин"
                             type="text" 
                             v-validate="'required'" 
                             v-model="form.login"
@@ -21,7 +22,8 @@
                     <div class="form-item" :class="{error: getError('login')}">
                         <label>Пароль</label>
                         <el-input 
-                            name="login"
+                            name="password"
+                            data-vv-name="пароль"
                             type="password" 
                             v-validate="'required'"
                             v-model="form.password"
@@ -66,7 +68,8 @@ export default {
                 this.$store.dispatch('login', this.form)
                     .then(res => {
                         if (res.success) {
-                            if (this.$route.query) {
+                            if (this.$route.query.length > 0) {
+                                console.log('query');
                                this.$router.replace(this.$route.query.from)
                             } else {
                                this.$router.push("/tickets/list")

@@ -60,6 +60,39 @@
                 </el-tab-pane>
             </el-tabs>
         </div>
+
+        <el-dialog
+            v-if="closed"
+            :visible.sync="modal.reopen"
+            width="550px"
+            append-to-body 
+            class="reopen-ticket-dialog"
+            :show-close="false" 
+            :close-on-click-modal="false" 
+        >
+            <loading :show="loading.reopen" center/>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-item comment-field">
+                        <label>Причина открытия заявки</label>
+                        <el-input 
+                            type="textarea" 
+                            v-model="reopenTicketForm.comment" 
+                            :rows="5" 
+                        />
+                    </div>
+                </div>
+                <div class="col-12">
+                    <el-button type="success" size="mini" @click="reopenSubmit" :disabled="!reopenTicketForm.comment">
+                       Продолжить
+                    </el-button>
+                    <el-button type="link" size="mini" @click="modal.reopen = false">
+                       Отмена
+                    </el-button>
+                </div>
+            </div>
+        </el-dialog>
     </div>
 </template>
 
@@ -81,14 +114,21 @@ export default {
    
     data() {
         return {
-           
             loading: {
-                init: false
+                init: false,
+                reopen: false
+            },
+            modal: {
+                reopen: false
             },
             detail: {},
             comments: [],
             events: [],
             attachments: [],
+
+            reopenTicketForm: {
+                comment: ''
+            },
             
             selects: {
                 statuses: config.statusesList
@@ -126,6 +166,29 @@ export default {
                 })
                 .finally(() => this.loading.init = false)
         },
+
+        reopenSubmit() {
+            this.loading.reopen = true
+             HTTP.post(`tickets/reopen/${this.detail.id}`, {
+                 ...this.reopenTicketForm,
+                 last_update: this.detail.last_update
+                })
+                .then(res => {
+                    if (res.data.success) {
+                        this.modal.reopen = false
+                        this.init()
+                    } else {
+                        this.$notify({
+                            title: 'Ошибка',
+                            message: res.data.message,
+                            type: 'error'
+                        })
+                    }
+                })
+                .finally(() => {
+                    this.loading.reopen = false
+                })
+        }
        
     }
 }
