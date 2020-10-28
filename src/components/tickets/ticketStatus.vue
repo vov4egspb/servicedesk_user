@@ -26,7 +26,7 @@ export default {
     line-height: 1;
     white-space: nowrap;
     background: #fff;
-    border: 0px solid #dcdfe6;
+    border: 1px solid #dcdfe6;
     color: #606266;
     -webkit-appearance: none;
     text-align: center;
@@ -37,7 +37,7 @@ export default {
     -webkit-transition: .1s;
     transition: .1s;
     font-weight: 500;
-    padding: 5px 10px;
+    padding: 9px 15px;
     font-size: 12px;
     border-radius: 4px;
 

@@ -2,7 +2,8 @@
     <div class="default-layout">
         <div class="main-panel">
             <div class="top-nav-bar">
-                <div class="container">
+              <div style="width: 100%; max-width:1400px; margin: 0 auto;">
+                <div class="container-fluid">
                     <div class="row">
                         <div class="col">
                             <div class="d-flex align-items-center justify-content-between">
@@ -38,10 +39,9 @@
                         </div>
                     </div>
                 </div>
-                
-                
+              </div>
             </div>
-            <div class="container">
+            <div class="container-fluid">
                 <div class="row">
                     <div class="col-12">
                         <div class="content">
@@ -52,7 +52,6 @@
                     </div>
                 </div>
             </div>
-            
         </div>
     </div>
 </template>
@@ -102,14 +101,15 @@ export default {
 
     .default-layout {
         position: relative;
-        max-width: 100%;
+        max-width: 1400px;
+        margin: 0 auto;
         min-height: 100vh;
         padding-top: 80px;
 
         .content {
             padding-bottom: 50px;
         }
-        
+
 
         .menu-icon {
             flex-grow: 1;

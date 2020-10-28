@@ -7,7 +7,7 @@
                 :key="index"
                 :type="index + 1 != data.length ? 'primary' : 'success'"
                 :timestamp="event.create_time">
-                <span class="event-agent-name">{{event.author}}</span> {{event.text}}
+                <span class="event-agent-name">{{event.author}}</span> <span v-html="event.text"></span>
                 </el-timeline-item>
             </el-timeline>
         </div> 

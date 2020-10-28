@@ -7,11 +7,31 @@
         <div class="header-wrapper">
             <div class="header">
                 <div>
-                    <h1>#{{detail.id}}: {{detail.name}}</h1>
-                    <span class="ticket-date">{{detail.create_time}}</span>
+                  <el-button 
+                        type="default" 
+                        size="small" 
+                        class="mb-2"
+                        @click="$router.push('/')"
+                      >
+                       Назад
+                      </el-button>
+                    <div>  
+                      <h1>#{{detail.id}}: {{detail.name}}</h1>
+                      <span class="ticket-date">{{detail.create_time}}</span>
+                    </div>
                 </div>
                 <div class="d-flex align-items-start">
-                <ticket-status type="bage" :id="detail.status"/>
+                  <el-button 
+                    v-if="closed"
+                    type="danger" 
+                    size="small" 
+                    class="mr-2"
+                    @click="modal.reopen = true"
+                    
+                  >
+                    Открыть повторно
+                  </el-button>
+                  <ticket-status type="bage" :id="detail.status"/>
                 </div>
             </div>
             <div class="info-wrapper">
@@ -22,6 +42,7 @@
                     Исполнитель: <span v-if="detail.agent_name">{{detail.agent_name}}</span><template v-else>нет</template>
                 </div>
             </div>
+            
         </div>
         <div class="body mt-3">
             <el-tabs type="border-card">
@@ -31,15 +52,15 @@
                     <div v-else class="text">
                         <div>
                             <div><b>Обоснование необходимости доработки:</b></div>
-                            <div class="mt-1"><p>{{detail.reason}}</p></div>
+                            <div class="mt-1"><p v-html="detail.reason"></p></div>
                         </div>
                         <div>
                             <div><b>Описание задачи:</b></div>
-                            <div class="mt-1"><p>{{detail.text}}</p></div>
+                            <div class="mt-1"><p v-html="detail.text"></p></div>
                         </div>
                         <div>
                             <div><b>Результат доработки:</b></div>
-                            <div class="mt-1"><p>{{detail.result_dev}}</p></div>
+                            <div class="mt-1"><p v-html="detail.result_dev"></p></div>
                         </div>
                     </div>
                 </el-tab-pane>
@@ -69,13 +90,12 @@
             class="reopen-ticket-dialog"
             :show-close="false" 
             :close-on-click-modal="false" 
+            @closed="closeEvent"
         >
-            <loading :show="loading.reopen" center/>
-
-            <div class="row">
+            <div class="row" v-loading="loading.reopen">
                 <div class="col-12">
                     <div class="form-item comment-field">
-                        <label>Причина открытия заявки</label>
+                        <label>Причина повторного открытия заявки</label>
                         <el-input 
                             type="textarea" 
                             v-model="reopenTicketForm.comment" 
@@ -171,6 +191,7 @@ export default {
             this.loading.reopen = true
              HTTP.post(`tickets/reopen/${this.detail.id}`, {
                  ...this.reopenTicketForm,
+                 agent_id: this.detail.agent_id,
                  last_update: this.detail.last_update
                 })
                 .then(res => {
@@ -188,6 +209,10 @@ export default {
                 .finally(() => {
                     this.loading.reopen = false
                 })
+        },
+
+        closeEvent() {
+          this.reopenTicketForm.comment = ''
         }
        
     }
@@ -216,7 +241,7 @@ export default {
             }
 
             h1 {
-                font-size: 32px;
+                font-size: 24px;
                 padding: 0;
                 margin: 0;
             }
@@ -280,6 +305,12 @@ export default {
         
 
 
+    }
+
+    .reopen-ticket-dialog {
+      .el-dialog__header {
+        display: none;
+      }
     }
 
 </style>

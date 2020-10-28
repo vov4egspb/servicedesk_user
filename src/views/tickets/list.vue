@@ -3,6 +3,10 @@
         <div class="header">
             <h1>Ваши заявки</h1>
             <div class="d-flex align-items-center">
+                <div v-if="isTeamlead" class="d-flex align-items-center mr-5" style="font-size:14px; font-weight: bold">
+                  <span class="mr-2">Заявки подчиненных</span>
+                  <el-switch style="position: relative; top:1px;" v-model="filter.all" active-color="#1a1a46" @click.native="init"/>
+                </div>
                 <span :class="['filter-btn mr-4']" @click="show.filter = !show.filter">
                     <font-awesome-icon icon="filter"/>
                     {{show.filter ? 'скрыть' : 'показать'}} фильтр
@@ -64,33 +68,37 @@
                 >
                 <el-table-column
                     prop="id"
-                    label="Номер"
-                    width="110">
+                    label="#"
+                    width="80">
                 </el-table-column>
                 <el-table-column
                     prop="name"
                     label="Название"
-                    width="180">
+                    min-width="180">
                 </el-table-column>
                 <el-table-column
-                    prop="queue_name"
-                    label="Очередь"
-                    >
+                    prop="user_name"
+                    label="Автор"
+                    min-width="180">
                 </el-table-column>
                 <el-table-column
                     prop="agent_name"
                     label="Исполнитель"
+                    min-width="180"
                     >
                     <template slot-scope="scope">
                         <span class="cell__center">
                             {{scope.row.agent_id ? scope.row.agent_name : '-'}}
                         </span>
+                        <div class="queue-name" v-if="scope.row.agent_id">
+                          {{scope.row.queue_name}}
+                        </div>
                     </template>
                 </el-table-column>
                 <el-table-column
                     prop="create_time"
                     label="Дата создания"
-                    width="130"
+                    width="120"
                     >
                     <template slot-scope="scope">
                         <span class="cell__center">
@@ -99,7 +107,7 @@
                         </span>
                     </template>
                 </el-table-column>
-                <el-table-column prop="status" label="Статус" width="130" sortable>
+                <el-table-column prop="status" label="Статус" width="160" sortable>
                     <template slot-scope="scope">
                         <span class="cell__center"><ticket-status type="bage" :id="scope.row.status"/></span>
                     </template>
@@ -123,6 +131,7 @@
 <script>
 import {HTTP} from '@/http/common'
 import config from '@/config'
+import cookie from 'vue-cookie'
 import ticketStatus from '@/components/tickets/ticketStatus.vue'
 import CommentsList from '@/components/tickets/CommentsList.vue'
 import AttachmentsList from '@/components/tickets/AttachmentsList.vue'
@@ -145,6 +154,11 @@ export default {
             return value.split(' ')[0]
         }
     },
+    computed: {
+      isTeamlead() {
+        return this.$store.getters.isTeamlead
+      }
+    },
     data() {
         return {
             show: {
@@ -166,7 +180,8 @@ export default {
                 id: null,
                 name: '',
                 status: null,
-                period: []
+                period: [],
+                all: false
             },
 
             selects: {
@@ -175,8 +190,15 @@ export default {
         }
     },
 
+    watch: {
+      'filter.all': function(val) {
+        cookie.set('show_all_ticket', val, { expires: '1Y' })
+      }
+    },
+
     created() {
-        this.init()
+      this.filter.all = cookie.get('show_all_ticket') == 'true' ? true : false
+      this.init()
     },
 
     methods: {
@@ -235,6 +257,8 @@ export default {
             }
         }
 
+
+
         .filter-btn {
             font-size: 14px;
             font-weight: bold;
@@ -273,6 +297,11 @@ export default {
                 &:hover {
                     cursor: pointer;
                 }
+            }
+
+            .queue-name {
+              font-size: 12px;
+              opacity: 0.5;
             }
 
         }

@@ -233,9 +233,13 @@ export default {
 
                     const formData = new FormData()
 
+                    // this.form.text = this.form.text.split('\n').join('<br/>')
+                    // this.form.reason = this.form.reason.split('\n').join('<br/>')
+                    // this.form.result_dev = this.form.result_dev.split('\n').join('<br/>')
+
                     for (const field in this.form) {
                         if (field !== 'attachments' && field !== 'imagesAttachments') {
-                        formData.append(field, this.form[field])
+                          formData.append(field, this.form[field])
                         }
                     }
 
