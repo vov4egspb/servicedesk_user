@@ -1,20 +1,18 @@
 <template>
-    <span v-if="id">
-        <span :class="`status ${status[id].className}`" v-if="type == 'bage'" @click="$emit('click')">{{status[id].text}}</span>
-    </span>
+    <span v-if="id" :class="`status ${status[id].className}`">{{status[id].text}}</span>
 </template>
 
 <script>
 import config from '@/config'
 export default {
-    name: 'ticketStatus',
+    name: 'basesStatus',
     props: {
         id: String,
         type: String
     },
     data() {
         return {
-            status: config.statusesList
+            status: config.basesStatusesList
         }
     }
 }
@@ -41,31 +39,13 @@ export default {
     font-size: 12px;
     border-radius: 4px;
 
-    &-new {
-        color: #fff;
-        background: #0095ff;
-        border-color: #0095ff;
-    }
-
-    &-inwork {
-        color: #fff;
-        background: #ff5e00;
-        border-color: #ff5e00;
-    }
-
     &-pending {
-        color: #409EFF;
-        background: #ecf5ff;
-        border-color: #b3d8ff;
+      color: #fff;
+      background: #ff5e00;
+      border-color: #ff5e00;
     }
 
-    &-fail {
-        color: #fff;
-        background: #dc3545;
-        border-color: #dc3545;
-    }
-
-    &-close {
+    &-active {
         color: #fff;
         background: #16a085;
         border-color: #16a085;

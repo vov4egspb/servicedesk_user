@@ -8,23 +8,12 @@
                         <div class="col">
                             <div class="d-flex align-items-center justify-content-between">
                                 <div class="logo-wrapper">
-                                    <img src="/images/logo.png" alt="">
                                     <span>
-                                        SERVICEDESK
+                                        LOGO
                                         <div class="text">
-                                            АО "УК "Старт"
+                                            Личный кабинет
                                         </div>    
                                     </span>
-                                </div>
-                                <div class="flex-grow-1">
-                                    <el-button 
-                                        class="ml-4"
-                                        type="success" 
-                                        size="small" 
-                                        @click="$router.push('/tickets/new')"
-                                    >
-                                        Создать заявку
-                                    </el-button>
                                 </div>
                                 <div class="d-flex">
                                     <div class="agent-name">

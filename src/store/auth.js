@@ -6,18 +6,16 @@ export default {
   state: {
     user: {
       name: '',
-      email: '',
-      allow_dev_ticket: false,
-      is_teamlead: false
+      email: ''
     },
     token: cookie.get('token') || null
   },
 
   mutations: {
     updateToken(state, data) {
-      cookie.set('token', data.access, { expires: '1Y' })
+      cookie.set('token', data.token, { expires: '1Y' })
       cookie.set('refreshToken', data.refresh_token, { expires: '1Y' })
-      state.token = data.access
+      state.token = data.token
     },
 
     updateUser(state, data) {
@@ -92,9 +90,7 @@ export default {
 
   getters: {
     user: state => state.user,
-    isLogged: state => state.token ? true : false,
-    isTeamlead: state => state.user.is_teamlead,
-    isAllowDevTicket: state => state.user.allow_dev_ticket == 1 ? true : false,
+    isLogged: state => state.token ? true : false
   }
 
 }

@@ -5,15 +5,6 @@
                 <div class="row">
                     <div class="col">
                         <div class="d-flex align-items-center justify-content-between">
-                            <div class="logo-wrapper">
-                                <img src="/images/logo.png" alt="">
-                                <span>
-                                    SERVICEDESK
-                                    <div class="text">
-                                        АО "УК "Старт"
-                                    </div>    
-                                </span>
-                            </div>
                         </div>
                     </div>
                 </div>

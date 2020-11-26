@@ -14,8 +14,7 @@ function addSubscriber(callback) {
 }
 
 const HTTP = axios.create({
-  //baseURL: process.env.NODE_ENV === 'development' ? 'http://api01.start.local/users/v1/' : 'http://api01.start.local/users/v1/',
-  baseURL: process.env.NODE_ENV === 'development' ? 'http://api01.start.local/users/v1/' : 'http://api.spb-buh-desc-1.start.local/users/v1/',
+  baseURL: process.env.NODE_ENV === 'development' ? 'http://1cshop.loc/api/v1/' : 'http://api1c.wapps.pro/api/v1/',
 })
 
 

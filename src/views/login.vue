@@ -6,16 +6,16 @@
             </div>
             <div class="row">
                 <div class="col-12">
-                    <div class="form-item" :class="{error: getError('login')}">
+                    <div class="form-item" :class="{error: getError('email')}">
                         <label>Логин</label>
                         <el-input 
-                            name="login"
-                            data-vv-name="логин"
+                            name="email"
+                            data-vv-name="email"
                             type="text" 
                             v-validate="'required'" 
-                            v-model="form.login"
+                            v-model="form.email"
                         />
-                        <span class="error-message" v-if="getError('login')">{{getError('login')}}</span>
+                        <span class="error-message" v-if="getError('email')">{{getError('email')}}</span>
                     </div>
                 </div>
                 <div class="col-12">
@@ -49,7 +49,7 @@ export default {
         return {
             loading: false,
             form: {
-                login: '',
+                email: '',
                 password: ''
             }
         }
@@ -69,7 +69,6 @@ export default {
                     .then(res => {
                         if (res.success) {
                             if (this.$route.query.length > 0) {
-                                console.log('query');
                                this.$router.replace(this.$route.query.from)
                             } else {
                                this.$router.push("/tickets/list")

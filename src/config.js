@@ -1,20 +1,23 @@
 
-const ticketStatusesList = {
-    1: { label: 'Новая', type: 'warning'}
+const basesStatusesList = {
+  0: { id: 0, text: 'Создается', className: 'status-pending'},
+  1: { id: 1, text: 'Активна', className: 'status-active'},
 }
 
-const statusesList = {
-    1: { id: 1, text: 'Новая', className: 'status-new'},
-    2: { id: 2, text: 'В работе', className: 'status-inwork'},
-    3: { id: 3, text: 'Отложена', className: 'status-pending'},
-    4: { id: 4, text: 'Ожидает ответа', className: 'status-wait'},
-    5: { id: 5, text: 'Успешно закрыта', className: 'status-close'},
-    6: { id: 6, text: 'Закрыта с отказом', className: 'status-fail'},
+const userStatusesList = {
+  0: { id: 0, text: 'Создается', className: 'status-pending'},
+  1: { id: 1, text: 'Активен', className: 'status-active'},
+}
+
+const companyStatusesList = {
+  0: { id: 0, text: 'Создается', className: 'company-status-pending' },
+  1: { id: 1, text: 'Активена', className: 'company-status-active' },
+  2: { id: 2, text: 'Ошибка', className: 'company-status-warning' },
 }
 
 
 export default {
-    ticketStatusesList,
-    statusesList,
-    attachmentsUrl: 'http://api01.start.local/uploads/'
+  companyStatusesList,
+  basesStatusesList,
+  userStatusesList
 }

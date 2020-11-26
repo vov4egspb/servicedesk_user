@@ -1,4 +1,9 @@
 
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap');
+
+body {
+  font-family: 'Montserrat', sans-serif;
+}
 
 
 
@@ -20,7 +25,11 @@
     }
 }
 
-
+.table-time {
+  font-size: 12px;
+  opacity: 0.5;
+  line-height: 12px;
+}
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -83,3 +92,14 @@ input::-webkit-inner-spin-button {
 
 @import 'vars';
 @import 'forms';
+
+
+
+.el-dialog__header {
+    padding: 20px 20px 0px;
+    font-weight: bold;
+}
+
+.el-dialog__body {
+  padding: 20px 20px;
+}
